@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Adicionar da Patente</title>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="style.css" rel="stylesheet">
+	</head>
+	
+<body>
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-2">
+			<img alt="IFCE-Logo" src="libraries/image.png" width="170px">
+		</div>
+		<div class="col-md-10">
+			<h1>
+				<br><br>
+				Adicionar Patente
+			</h1>
+			<br><br>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2">
+			<br><br>
+			<ul class="nav flex-column">
+				<li class="nav-item">
+					<a class="nav-link active" style="color: gray" href="Main.html">Início</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="#" style="color: gray">Profile</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link disabled" style="color: gray" href="#">Messages</a>
+				</li>
+			</ul>
+			<br><br><br>
+		</div>
+
+		<div class="col-md-8">
+			<form role="form">
+
+				<div class="form-group" >
+						<label for="nomeOficial">
+								Nome Oficial:  <label type="text" style="color: gray" class="btn btn-outline-dark btn-sm disabled rounded-circle" data-toggle="tooltip" data-placement="top" title="Ajuda">?</label>
+							</label>
+							<input type="text" class="form-control" id="nomeOficial">
+							<br>
+							<label for="campoAplicacao" >
+									Campo de Aplicação: <label type="text" style="color: gray" class="btn btn-outline-dark btn-sm disabled rounded-circle" data-toggle="tooltip" data-placement="top" title="Ajuda">?</label>
+								</label> 
+							<input type="text" class="form-control" id="campoAplicacao">
+				</div>
+
+				<div class="form-group">
+						<label for="descricaoOficial">
+							Descrição Oficial: <label type="text" style="color: gray" class="btn btn-outline-dark btn-sm disabled rounded-circle" data-toggle="tooltip" data-placement="top" title="Ajuda">?</label>
+						</label>
+						<textarea class="form-control" id="descricaoOficial" rows="3"></textarea>
+						<br>
+						<label for="objetivo">
+							Objetivo: <label type="text" style="color: gray" class="btn btn-outline-dark btn-sm disabled rounded-circle" data-toggle="tooltip" data-placement="top" title="Ajuda">?</label>
+						</label>
+						<textarea class="form-control" id="objetivo" rows="3"></textarea>
+						<br>
+						<label for="particularidadeBeneficio">
+							Particularidade Benefício: <label type="text" style="color: gray" class="btn btn-outline-dark btn-sm disabled rounded-circle" data-toggle="tooltip" data-placement="top" title="Ajuda">?</label>
+						</label>
+						<textarea class="form-control" id="particularidadeBeneficio" rows="3"></textarea>
+						<br>
+						<label for="dificuldadeDesvantagem">
+							Dificuldade Desvantagem: <label type="text" style="color: gray" class="btn btn-outline-dark btn-sm disabled rounded-circle" data-toggle="tooltip" data-placement="top" title="Ajuda">?</label>
+						</label>
+						<textarea class="form-control" id="dificuldadeDesvantagem" rows="3"></textarea>
+						<br>
+						<label for="descricaoFiguras">
+							Descrição das Figuras: <label type="text" style="color: gray" class="btn btn-outline-dark btn-sm disabled rounded-circle" data-toggle="tooltip" data-placement="top" title="Ajuda">?</label>
+						</label>
+						<textarea class="form-control" id="descricaoFiguras" rows="3"></textarea>
+				</div>
+
+					<br><br>
+
+					<button type="submit" class="btn btn-success btn-lg" onclick="adicionarPatente()">
+						Adicionar
+					</button>
+					<br><br>
+			</form>
+		</div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-2">
+			IFCE@2019
+		</div>
+		<div class="col-md-8">
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+
+</div>
+		
+		<script>
+
+			function adicionarPatente(){
+				window.alert("Adicionada com Sucesso!");
+				window.open('Main.html');
+			}
+			
+		</script>
+
+  </body>
+</html>
