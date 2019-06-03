@@ -37,7 +37,7 @@
 					<a class="nav-link active" style="color: gray" href="home.html">Início</a>
 				</li>
 				<li class="nav-item">
-					<a class="nav-link" href="#" style="color: gray">Profile</a>
+					<a class="nav-link" href="add_user.html" style="color: gray">Usuários</a>
 				</li>
 				<li class="nav-item">
 					<a class="nav-link disabled" style="color: gray" href="#">Messages</a>
@@ -46,71 +46,45 @@
 			<br><br><br>
 		</div>
 
-		<!-- onclick="adicionaLinha('tbpatentes')" -->
-
-		<div class="col-md-10">
-				<button type="button" class="btn btn-success"  style="width: 260px" onclick="window.location.href='add.html'">
-						Adicionar
-				</button>
-				<br><br>
-			<div style="overflow: auto; height: 338px;">
-					<table class="table" id="tbpatentes">
-							<thead>
-								<tr>
-									<th>
-										Título
-									</th>
-									<th>
-										Data de Cadastro
-									</th>
-									<th></th>
-									<th></th>
-								</tr>
-							</thead>
-						</table>
+			<div class="col-md-10">
+					<button type="button" class="btn btn-success"  style="width: 260px" onclick="window.location.href='add.html'">
+							Adicionar
+					</button>
+					<br><br>
+				<div style="overflow: auto; height: 338px;">
+						<table class="table" id="tbpatentes">
+								<thead>
+									<tr>
+										<th>
+											Título
+										</th>
+										<th>
+											Data de Cadastro
+										</th>
+										<th></th>
+										<th></th>
+									</tr>
+								</thead>
+							</table>
+				</div>
 			</div>
 		</div>
+
+		<div class="row">
+				<div class="col-md-2" style="color: gray">
+					IFCE@2019
+				</div>
+				<div class="col-md-8">
+				</div>
+				<div class="col-md-2">
+				</div>
+		</div>
+
 	</div>
 
-	<div class="row">
-			<div class="col-md-2" style="color: gray">
-				IFCE@2019
-			</div>
-			<div class="col-md-8">
-			</div>
-			<div class="col-md-2">
-			</div>
-	</div>
+	<script>
 
-</div>
-
-<script>
-
-		$("tbody tr").on('click', function() {
-			var id = this.firstElementChild.textContent;
-			console.log(id);
-		});
-
-		function adicionaLinha(idTabela) {
-                var tabela = document.getElementById(idTabela);
-                var numeroLinhas = tabela.rows.length;
-                var linha = tabela.insertRow(numeroLinhas);
-                var celula1 = linha.insertCell(0);
-                var celula2 = linha.insertCell(1);
-								var celula3 = linha.insertCell(2);
-								var celula4 = linha.insertCell(3);
-                celula1.innerHTML = 'Projeto Patentes'; 
-                celula2.innerHTML =  '10/05/2019';
-								celula3.innerHTML =  "<button class='btn btn-block btn-secondary' onclick='editaLinha(this)'>Editar</button>"
-                celula4.innerHTML =  "<button class='btn btn-block btn-danger' onclick='removeLinha(this)'>Remover</button>";
-    }
-
-		function removeLinha(linha) {
-              var i=linha.parentNode.parentNode.rowIndex;
-              document.getElementById('tbpatentes').deleteRow(i);
-    }  
-
-</script>
+	</script>
 
   </body>
 </html>

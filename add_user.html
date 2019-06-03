@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+		<title>Adicionar Usuário</title>
+		
+		<link rel="stylesheet" href="libraries/css/bootstrap.min.css">
+		<script src="libraries/js/jquery.js"></script>
+		<link href="libraries/css/style.css" rel="stylesheet">
+	</head>
+	
+<body>
+	<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-2">
+			<img alt="IFCE-Logo" src="libraries/image.png" width="170px">
+		</div>
+		<div class="col-md-10">
+			<h1>
+				<br><br>
+				Adicionar Usuário
+			</h1>
+			<br><br>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-2">
+			<br><br>
+			<ul class="nav flex-column">
+				<li class="nav-item">
+					<a class="nav-link active" style="color: gray" href="home.html">Início</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="add_user.html" style="color: gray">Usuários</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link disabled" style="color: gray" href="#">Messages</a>
+				</li>
+			</ul>
+			<br><br><br>
+		</div>
+
+		<div class="col-md-8">
+			<form role="form">
+
+				<div class="form-group" >
+						<label for="loginUsuario">
+								Login:  <label type="text" style="color: gray" class="btn btn-outline-dark btn-sm disabled rounded-circle" data-toggle="tooltip" data-placement="top" title="Login de acesso para o novo usuário">?</label>
+							</label>
+							<input type="text" class="form-control" id="loginUsuario">
+                            <br>
+                            <label for="emailUsuario" >
+									Email: <label type="text" style="color: gray" class="btn btn-outline-dark btn-sm disabled rounded-circle" data-toggle="tooltip" data-placement="top" title="Email do novo usuário">?</label>
+								</label> 
+                            <input type="text" class="form-control" id="emailUsuario">
+                            <br>
+							<label for="senhaUsuario" >
+									Senha: <label type="text" style="color: gray" class="btn btn-outline-dark btn-sm disabled rounded-circle" data-toggle="tooltip" data-placement="top" title="Senha para o novo usuário">?</label>
+								</label> 
+                            <input type="password" class="form-control" id="senhaUsuario">
+                            <br>
+                            <label for="confirmaSenha" >
+									Confirmar Senha: 
+								</label> 
+							<input type="password" class="form-control">
+                </div>
+                
+                    <br><br>
+                    
+					<button type="submit" class="btn btn-success btn-lg" onclick="adicionarUsuario()">
+						Adicionar
+					</button>
+					<br><br><br>
+            </form>
+            
+            <div style="overflow: auto; height: 338px;">
+                    <table class="table" id="tbusuarios">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        Login
+                                    </th>
+                                    <th>
+                                        Email
+                                    </th>
+                                    <th></th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                        </table>
+            </div>
+
+		</div>
+
+	</div>
+
+	<div class="row">
+		<div class="col-md-2">
+			IFCE@2019
+		</div>
+		<div class="col-md-8">
+		</div>
+		<div class="col-md-2">
+		</div>
+	</div>
+
+</div>
+		
+		<script>
+			function adicionarUsuario(){
+				window.alert("Adicionado(a) com Sucesso!");
+			}
+        </script>
+  </body>
+</html>
