@@ -9,6 +9,8 @@
 		<link rel="stylesheet" href="libraries/css/bootstrap.min.css">
 		<script src="libraries/js/jquery.js"></script>
 		<link href="libraries/css/style.css" rel="stylesheet">
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<!-- <script src="libraries/js/main.js"></script> -->
 	</head>
 	
 <body>
@@ -88,7 +90,7 @@
                                     </th>
                                     <th></th>
                                     <th></th>
-                                </tr>
+								</tr>
                             </thead>
                         </table>
             </div>
@@ -110,9 +112,34 @@
 </div>
 		
 		<script>
+			var table = document.getElementById('tbusuarios');
+			
+
+			function pegar_usuario(id, linha){
+				var row = table.insertRow(linha);
+				axios.get('https://teste-patentes.herokuapp.com/usuarios/'+id)
+					.then(function(response){
+						row.innerHTML = "<td>"+response.data.nome+"</td> <td>"+response.data.email+"</td><td></td><td></td>";
+						console.log(response.data.id);
+						console.log(response.data.nome);
+						console.log(response.data.email);
+						console.log(response.data.senha);
+					})
+					.catch(function(error){
+						console.warn(error);
+					})
+				;
+			}
+
+			for(i=1; i<5; i++){
+				pegar_usuario(i, i);
+			}
+
 			function adicionarUsuario(){
 				window.alert("Adicionado(a) com Sucesso!");
 			}
-        </script>
+
+		</script>
+
   </body>
 </html>
