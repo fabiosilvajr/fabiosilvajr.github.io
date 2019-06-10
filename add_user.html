@@ -73,7 +73,7 @@
                 
                     <br><br>
                     
-					<button type="submit" class="btn btn-success btn-lg" onclick="adicionarUsuario()">
+					<button type="button" class="btn btn-success btn-lg" onclick="adicionarUsuario()">
 						Adicionar
 					</button>
 					<br><br><br>
@@ -114,32 +114,35 @@
 		
 		<script>
 			var table = document.getElementById('tbusuarios');
-			
 
 			function pegar_usuario(id, linha){
 				var row = table.insertRow(linha);
 				axios.get('https://teste-patentes.herokuapp.com/usuarios/'+id)
 					.then(function(response){
 						row.innerHTML = "<td>"+response.data.nome+"</td> <td>"+response.data.email+"</td><td></td><td></td>";
-						console.log(response.data.id);
-						console.log(response.data.nome);
-						console.log(response.data.email);
-						console.log(response.data.senha);
 					})
 					.catch(function(error){
 						console.warn(error);
-					})
-				;
+					});
 			}
 
-			for(i=1; i<5; i++){
-				pegar_usuario(i, i);
+			function listarUsuarios(){
+				axios.get('https://teste-patentes.herokuapp.com/usuarios')
+					.then(function(response){
+						for(var i = 1; i <= response.data.length; i++){
+							pegar_usuario(i, i);
+						}
+					})
+					.catch(function(error){
+						console.warn(error);
+					});
 			}
 
 			function adicionarUsuario(){
-				window.alert("Adicionado(a) com Sucesso!");
+				window.alert('Usuário adicionado com sucesso!');
 			}
 
+			listarUsuarios();
 		</script>
 
   </body>
