@@ -119,7 +119,7 @@
 				var row = table.insertRow(linha);
 				axios.get('https://teste-patentes.herokuapp.com/usuarios/'+id)
 					.then(function(response){
-						row.innerHTML = "<td>"+response.data.nome+"</td> <td>"+response.data.email+"</td><td></td><td></td>";
+						row.innerHTML = "<td>"+response.data.nome+"</td> <td>"+response.data.email+"</td><td></td><td><button class='btn btn-block btn-danger' onclick='removeLinha()'>Remover</button></td>";
 					})
 					.catch(function(error){
 						console.warn(error);
@@ -141,6 +141,10 @@
 			function adicionarUsuario(){
 				window.alert('Usuário adicionado com sucesso!');
 			}
+
+			function removeLinha(linha) {
+              window.alert('removeu!');
+    		} 
 
 			listarUsuarios();
 		</script>
