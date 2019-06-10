@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Tela de Login</title>
+
+	<link rel="stylesheet" href="libraries/css/bootstrap.min.css">
+	<script src="libraries/js/jquery.js"></script>
+	<link href="libraries/css/style.css" rel="stylesheet">
+
+  </head>
+  <body>
+
+    <div class="container-fluid">
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4 text-center">
+			<br><br>
+			<img alt="IFCE-Logo" src="libraries/image.png" width="170px" >
+			<br><br>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-4">
+		</div>
+		<div class="col-md-4">
+			<form role="form">
+				<div class="form-group">
+					 
+					<label for="login">
+						Login:
+					</label>
+					<input type="text" class="form-control" id="login">
+				</div>
+				<div class="form-group">
+					 
+					<label for="senha">
+						Senha:
+					</label>
+					<input type="password" class="form-control" id="senha">
+				</div>
+
+				<button type="button" class="btn btn-success btn-lg btn-block" onclick="logon()">
+					Entrar
+				</button>
+			</form>
+		</div>
+		<div class="col-md-4">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2">
+			<br><br><br><br>
+			IFCE@2019
+		</div>
+		<div class="col-md-10">
+		</div>
+	</div>
+</div>
+
+	<script>
+
+		function logon(){
+			var login = document.getElementById('login').value;
+			var senha = document.getElementById('senha').value;
+
+			if(login == 'admin' && senha == 'admin'){
+				window.location.href = "home.html";
+			} else {
+				window.alert("Usuário e/ou senha incorreto(s).");
+			}
+				
+		}
+		
+	</script>
+
+  </body>
+</html>
