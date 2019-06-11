@@ -139,8 +139,19 @@
 			}
 
 			function adicionarUsuario(){
-				window.alert('Usuário adicionado com sucesso!');
+				axios.post('https://teste-patentes.herokuapp.com/usuarios/cre',{
+						nome: 'lucas',
+						email: 'lucas_tavares10@hotmail.com',
+						senha: 'admin'
+				})
+					.then(function(response){
+					})
+					.catch(function(error){
+						console.warn(error);
+					});
 			}
+
+			// window.alert('Usuário adicionado com sucesso!');
 
 			function removeLinha(linha) {
               window.alert('removeu!');

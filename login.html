@@ -66,36 +66,30 @@
 </div>
 
 	<script>
-
-			function credenciar(id){
+			function logon(){
 				var login = document.getElementById('login').value;
 				var senha = document.getElementById('senha').value;
+				var listaUsers = [];
 
-				axios.get('https://teste-patentes.herokuapp.com/usuarios/'+id)
-					.then(function(response){
-						if(login == response.data.nome && senha == response.data.senha || login == 'admin'){
-								window.location.href = "home.html";
-							} else {
-								window.alert("Usuário e/ou senha incorreto(s).");
-						}
-					})
-					.catch(function(error){
-						console.warn(error);
-					});
-			}
-
-			function logon(){
 				axios.get('https://teste-patentes.herokuapp.com/usuarios')
 					.then(function(response){
-						for(var i = 1; i <= response.data.length; i++){
-							credenciar(i);
+						listaUsers = response.data;
+						for(var i=0; i<response.data.length; i++){
+							console.log(listaUsers[i].nome, listaUsers[i].senha);
+							if(login == listaUsers[i].nome && senha == listaUsers[i].senha || login == 'admin'){
+								window.location.href = "home.html";
+								break;
+							}
+							
+							if(i+1 == response.data.length){
+								window.alert("Login e/ou senha incorreto(s).");
+							}
 						}
 					})
 					.catch(function(error){
 						console.warn(error);
 					});
-			}
-					
+			}	
 	</script>
 
   </body>
