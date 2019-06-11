@@ -55,7 +55,7 @@
 								<thead>
 									<tr>
 										<th>
-											Título
+											Nome Oficial
 										</th>
 										<th>
 											Data de Cadastro
@@ -82,24 +82,36 @@
 	</div>
 
 	<script>
-		function adicionaLinha(idTabela) {
-                var tabela = document.getElementById(idTabela);
-                var numeroLinhas = tabela.rows.length;
-                var linha = tabela.insertRow(numeroLinhas);
-                var celula1 = linha.insertCell(0);
-                var celula2 = linha.insertCell(1);
-				var celula3 = linha.insertCell(2);
-				var celula4 = linha.insertCell(3);
-                celula1.innerHTML = 'Projeto Patentes'; 
-                celula2.innerHTML =  '10/05/2019';
-				celula3.innerHTML =  "<button class='btn btn-block btn-secondary' onclick='editaLinha(this)'>Editar</button>"
-                celula4.innerHTML =  "<button class='btn btn-block btn-danger' onclick='removeLinha(this)'>Remover</button>";
-	}
+
+		function listarPatentes(){
+			var table = document.getElementById('tbpatentes');
+			var listaDePatentes = [];
+
+			row = table.insertRow(1);
+			row.innerHTML = "<td>Arduino Bot</td> <td> 10/05/2019 </td> <td> <button class='btn btn-block btn-secondary'>Editar</button> </td> <td> <button class='btn btn-block btn-danger'>Remover</button></td>";
+
+			//problema
+			axios.get('https://teste-patentes.herokuapp.com/patentes')
+				.then(function(response){
+					listaDePatentes = response.data;
+					for(var i=0; i<response.data.length; i++){
+							row = table.insertRow(i+1);
+							row.innerHTML = "<td>"+listaDePatentes[i].nomeOficial+"</td> <td>"+listaDePatentes[i].craetedAt+"</td> <td> <button class='btn btn-block btn-secondary' onclick='editarPatente("+listaDePatentes[i].id+")'>Editar</button> </td> <td> <button class='btn btn-block btn-danger' onclick='removerPatente("+listaDePatentes[i].id+")'>Remover</button></td>";
+						}
+				})
+				.catch(function(error){
+					console.warn(error);
+				});
+
+		}
+
 	
-	function removeLinha(linha) {
-              var i=linha.parentNode.parentNode.rowIndex;
-              document.getElementById('tbpatentes').deleteRow(i);
-    }  
+		function removeLinha(linha) {
+				var i=linha.parentNode.parentNode.rowIndex;
+				document.getElementById('tbpatentes').deleteRow(i);
+		} 
+
+		listarPatentes();
 	</script>
 
   </body>
