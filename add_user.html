@@ -39,9 +39,6 @@
 				<li class="nav-item">
 					<a class="nav-link" href="add_user.html" style="color: gray">Usuários</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link disabled" style="color: gray" href="#">Messages</a>
-				</li>
 			</ul>
 			<br><br><br>
 		</div>
@@ -51,7 +48,7 @@
 
 				<div class="form-group" >
 						<label for="loginUsuario">
-								Login:  <label type="text" style="color: gray" class="btn btn-outline-dark btn-sm disabled rounded-circle" data-toggle="tooltip" data-placement="top" title="Login de acesso para o novo usuário">?</label>
+								Login:  <label type="text" style="color: gray" class="btn btn-outline-dark btn-sm disabled rounded-circle" data-toggle="tooltip" data-placement="top" title="Login de acesso para o novo usuário.">?</label>
 							</label>
 							<input type="text" class="form-control" id="loginUsuario">
                             <br>
@@ -68,7 +65,7 @@
                             <label for="confirmaSenha" >
 									Confirmar Senha: 
 								</label> 
-							<input type="password" class="form-control">
+							<input type="password" class="form-control" id="confirmaSenha">
                 </div>
                 
                     <br><br>
@@ -84,13 +81,16 @@
                             <thead>
                                 <tr>
                                     <th>
+                                        ID
+                                    </th>
+                                    <th>
                                         Login
                                     </th>
                                     <th>
-                                        Email
-                                    </th>
-                                    <th></th>
-                                    <th></th>
+										Email
+									</th>
+                                    <th>
+									</th>
 								</tr>
                             </thead>
                         </table>
@@ -113,24 +113,17 @@
 </div>
 		
 		<script>
-			var table = document.getElementById('tbusuarios');
-
-			function pegar_usuario(id, linha){
-				var row = table.insertRow(linha);
-				axios.get('https://teste-patentes.herokuapp.com/usuarios/'+id)
-					.then(function(response){
-						row.innerHTML = "<td>"+response.data.nome+"</td> <td>"+response.data.email+"</td><td></td><td><button class='btn btn-block btn-danger' onclick='removeLinha()'>Remover</button></td>";
-					})
-					.catch(function(error){
-						console.warn(error);
-					});
-			}
 
 			function listarUsuarios(){
+				var table = document.getElementById('tbusuarios');
+				var listaDeUsuarios = [];
+
 				axios.get('https://teste-patentes.herokuapp.com/usuarios')
 					.then(function(response){
-						for(var i = 1; i <= response.data.length; i++){
-							pegar_usuario(i, i);
+						listaDeUsuarios = response.data;
+						for(var i=0; i<response.data.length; i++){
+							row = table.insertRow(i+1);
+							row.innerHTML = "<td>"+listaDeUsuarios[i].id+"</td> <td>"+listaDeUsuarios[i].nome+"</td> <td>"+listaDeUsuarios[i].email+"</td> <td> <button class='btn btn-block btn-danger' onclick='removerUsuario("+listaDeUsuarios[i].id+")'>Remover</button></td>";
 						}
 					})
 					.catch(function(error){
@@ -138,24 +131,46 @@
 					});
 			}
 
+
 			function adicionarUsuario(){
-				axios.post('https://teste-patentes.herokuapp.com/usuarios/cre',{
-						nome: 'lucas',
-						email: 'lucas_tavares10@hotmail.com',
-						senha: 'admin'
-				})
+				var login = document.getElementById('loginUsuario').value;
+				var email = document.getElementById('emailUsuario').value;
+				var senha = document.getElementById('senhaUsuario').value;
+				var confirma = document.getElementById('confirmaSenha').value;
+
+				
+				if(senha == confirma && login != '' && senha != '' && email != '' && senha != ''){
+					axios.post('https://teste-patentes.herokuapp.com/usuarios/create', {
+						nome: login,
+						email: email,
+						senha: senha
+					})
 					.then(function(response){
+						window.alert('Usuário adicionado com sucesso!');
+						location.reload();
 					})
 					.catch(function(error){
 						console.warn(error);
 					});
+				} else {
+					window.alert('Dado(s) incorreto(s) ou vazio(s)!');
+				}
 			}
 
-			// window.alert('Usuário adicionado com sucesso!');
+			function removerUsuario(idUsuario) {
+				axios.delete('https://teste-patentes.herokuapp.com/usuarios', {
+					id: idUsuario
+				})
+				.then(function(response) {
+					window.alert('Usuário removido com sucesso!');
+					location.reload();
+				})
+				.catch(function(error) {
+					window.alert('Falha ao remover usuário!');
+				});
 
-			function removeLinha(linha) {
-              window.alert('removeu!');
-    		} 
+    		}
+
 
 			listarUsuarios();
 		</script>
