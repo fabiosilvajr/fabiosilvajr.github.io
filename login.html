@@ -75,7 +75,6 @@
 					.then(function(response){
 						listaUsers = response.data;
 						for(var i=0; i<response.data.length; i++){
-							console.log(listaUsers[i].nome, listaUsers[i].senha);
 							if(login == listaUsers[i].nome && senha == listaUsers[i].senha || login == 'admin'){
 								window.location.href = "home.html";
 								break;

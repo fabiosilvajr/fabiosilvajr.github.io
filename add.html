@@ -10,6 +10,8 @@
 		<link rel="stylesheet" href="libraries/css/bootstrap.min.css">
 		<script src="libraries/js/jquery.js"></script>
 		<link href="libraries/css/style.css" rel="stylesheet">
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 	</head>
 	
 <body>
@@ -107,24 +109,29 @@
 </div>
 		
 		<script>
-			function adicionarPatente(){
-				var nome_Oficial = document.getElementById('nomeOficial').value;
-				var campo_Aplicacao = document.getElementById('campoAplicacao').value;
-				var descricao_Oficial = document.getElementById('descricaoOficial').value;
-				var objetivo_ = document.getElementById('objetivo').value;
-				var particularidade_Beneficio = document.getElementById('particularidadeBeneficio').value;
-				var dificuldade_Desvantagem = document.getElementById('dificuldadeDesvantagem').value;
-				var descricao_Figuras = document.getElementById('descricaoFiguras').value;
+			var url = document.URL;
 
-				if(nome_Oficial !='' && campo_Aplicacao !=''){
+			console.log(url);
+
+
+			function adicionarPatente(){
+				var nomeOficial = document.getElementById('nomeOficial').value;
+				var campoAplicacao = document.getElementById('campoAplicacao').value;
+				var descricaoOficial = document.getElementById('descricaoOficial').value;
+				var objetivo = document.getElementById('objetivo').value;
+				var particularidadeBeneficio = document.getElementById('particularidadeBeneficio').value;
+				var dificuldadeDesvantagem = document.getElementById('dificuldadeDesvantagem').value;
+				var descricaoReferenteFiguras = document.getElementById('descricaoFiguras').value;
+
+				if(nomeOficial !='' && campoAplicacao !=''){
 					axios.post('https://teste-patentes.herokuapp.com/patentes/create', {
-							nomeOficial: nome_Oficial,
-							campoAplicacao: campo_Aplicacao,
-							descricaoOficial: descricao_Oficial,
-							objetivo: objetivo_,
-							particularidadeBeneficio: particularidade_Beneficio,
-							dificuldadeDesvantagem: dificuldade_Desvantagem,
-							descricaoReferenteFiguras: descricao_Figuras
+							nomeOficial: nomeOficial,
+							campoAplicacao: campoAplicacao,
+							descricaoOficial: descricaoOficial,
+							//objetivo: objetivo,
+							particularidadeBeneficio: particularidadeBeneficio,
+							dificuldadeDesvantagem: dificuldadeDesvantagem,
+							descricaoReferenteFiguras: descricaoReferenteFiguras
 						})
 					.then(function(response){
 						window.alert('Patente adicionada com sucesso!');

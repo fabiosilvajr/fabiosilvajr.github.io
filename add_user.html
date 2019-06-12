@@ -11,7 +11,6 @@
 		<script src="libraries/js/jquery.js"></script>
 		<link href="libraries/css/style.css" rel="stylesheet">
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-		<!-- <script src="libraries/js/main.js"></script> -->
 	</head>
 	
 <body>
@@ -80,17 +79,10 @@
                     <table class="table" id="tbusuarios">
                             <thead>
                                 <tr>
-                                    <th>
-                                        ID
-                                    </th>
-                                    <th>
-                                        Login
-                                    </th>
-                                    <th>
-										Email
-									</th>
-                                    <th>
-									</th>
+									<th>Login</th>
+									<th>Email</th>
+									<th></th>
+									<th></th>
 								</tr>
                             </thead>
                         </table>
@@ -123,7 +115,7 @@
 						listaDeUsuarios = response.data;
 						for(var i=0; i<response.data.length; i++){
 							row = table.insertRow(i+1);
-							row.innerHTML = "<td>"+listaDeUsuarios[i].id+"</td> <td>"+listaDeUsuarios[i].nome+"</td> <td>"+listaDeUsuarios[i].email+"</td> <td> <button class='btn btn-block btn-danger' onclick='removerUsuario("+listaDeUsuarios[i].id+")'>Remover</button></td>";
+							row.innerHTML = "<td>"+listaDeUsuarios[i].nome+"</td> <td>"+listaDeUsuarios[i].email+"</td> <td></td> <td> <button class='btn btn-block btn-danger' onclick='removerUsuario("+listaDeUsuarios[i].id+")'>Remover</button></td>";
 						}
 					})
 					.catch(function(error){
@@ -157,21 +149,16 @@
 				}
 			}
 
-			//problema
 			function removerUsuario(idUsuario) {
-				axios.delete('https://teste-patentes.herokuapp.com/usuarios', {
-					id: idUsuario
-				})
+				axios.post('https://teste-patentes.herokuapp.com/usuarios/'+idUsuario+'/?_method=DELETE')
 				.then(function(response) {
 					window.alert('Usuário removido com sucesso!');
 					location.reload();
 				})
 				.catch(function(error) {
-					window.alert('Falha ao remover usuário!');
+					window.alert('Falha ao remover usuário! ID: '+idUsuario);
 				});
-
     		}
-
 
 			listarUsuarios();
 		</script>

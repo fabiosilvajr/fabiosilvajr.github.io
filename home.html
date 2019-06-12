@@ -10,6 +10,7 @@
 		<link rel="stylesheet" href="libraries/css/bootstrap.min.css">
 		<script src="libraries/js/jquery.js"></script>
 		<link href="libraries/css/style.css" rel="stylesheet">
+		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
   </head>
 	
@@ -44,7 +45,6 @@
 			<br><br><br>
 		</div>
 
-		<!-- onclick="adicionaLinha('tbpatentes')" -->
 			<div class="col-md-10">
 					<button type="button" class="btn btn-success"  style="width: 260px" onclick="window.location.href='add.html'">
 							Adicionar
@@ -60,6 +60,7 @@
 										<th>
 											Data de Cadastro
 										</th>
+										<th></th>
 										<th></th>
 										<th></th>
 									</tr>
@@ -82,21 +83,16 @@
 	</div>
 
 	<script>
-
 		function listarPatentes(){
 			var table = document.getElementById('tbpatentes');
 			var listaDePatentes = [];
 
-			row = table.insertRow(1);
-			row.innerHTML = "<td>Arduino Bot</td> <td> 10/05/2019 </td> <td> <button class='btn btn-block btn-secondary'>Editar</button> </td> <td> <button class='btn btn-block btn-danger'>Remover</button></td>";
-
-			//problema
 			axios.get('https://teste-patentes.herokuapp.com/patentes')
 				.then(function(response){
 					listaDePatentes = response.data;
 					for(var i=0; i<response.data.length; i++){
 							row = table.insertRow(i+1);
-							row.innerHTML = "<td>"+listaDePatentes[i].nomeOficial+"</td> <td>"+listaDePatentes[i].craetedAt+"</td> <td> <button class='btn btn-block btn-secondary' onclick='editarPatente("+listaDePatentes[i].id+")'>Editar</button> </td> <td> <button class='btn btn-block btn-danger' onclick='removerPatente("+listaDePatentes[i].id+")'>Remover</button></td>";
+							row.innerHTML = "<td>"+listaDePatentes[i].nomeOficial+"</td> <td>"+listaDePatentes[i].createdAt+"</td> <td> <button class='btn btn-block btn-warning' onclick='visualizarPatente("+listaDePatentes[i].id+")'>Visualizar</button> </td> <td> <button class='btn btn-block btn-secondary' onclick='editarPatente("+listaDePatentes[i].id+")'>Editar</button> </td> <td> <button class='btn btn-block btn-danger' onclick='removerPatente("+listaDePatentes[i].id+")'>Remover</button></td>";
 						}
 				})
 				.catch(function(error){
@@ -104,11 +100,20 @@
 				});
 
 		}
-
 	
-		function removeLinha(linha) {
-				var i=linha.parentNode.parentNode.rowIndex;
-				document.getElementById('tbpatentes').deleteRow(i);
+		function removerPatente(idPatente) {
+			axios.post('https://teste-patentes.herokuapp.com/patentes/'+idPatente+'/?_method=DELETE')
+				.then(function(response) {
+					window.alert('Patente removida com sucesso!');
+					location.reload();
+				})
+				.catch(function(error) {
+					window.alert('Falha ao remover Patente! ID: '+idPatente);
+				});
+		}
+		
+		function editarPatente(idPatente) {
+			window.location.href = 'add.html?'+idPatente;
 		} 
 
 		listarPatentes();
