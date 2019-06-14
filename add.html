@@ -85,7 +85,7 @@
 
 				<br><br>
 
-				<button type="button" class="btn btn-success btn-lg" onclick="adicionarPatente()">
+				<button type="button" id="btAdicionar" class="btn btn-success btn-lg" onclick="adicionarPatente()">
 					Adicionar
 				</button>
 
@@ -110,8 +110,41 @@
 		
 		<script>
 			var url = document.URL;
+			var idUsuarioEditar = '';
+			var edicao = 'false';
 
-			console.log(url);
+			for(i=0; i< url.length; i++){
+				if(url[i] == '?'){
+					i++;
+					while(url[i] != '?'){
+						idUsuarioEditar = idUsuarioEditar + url[i];
+						i++;
+					}
+					var listaDePatentes = [];
+					axios.get('https://teste-patentes.herokuapp.com/patentes')
+						.then(function(response){
+							listaDePatentes = response.data;
+							for(var i=0; i<response.data.length; i++){
+									if(listaDePatentes[i].id == idUsuarioEditar){
+										document.getElementById('nomeOficial').value = listaDePatentes[i].nomeOficial;
+										document.getElementById('campoAplicacao').value = listaDePatentes[i].campoAplicacao;
+										document.getElementById('descricaoOficial').value = listaDePatentes[i].descricaoOficial;
+										document.getElementById('objetivo').value = listaDePatentes[i].objetivo;
+										document.getElementById('particularidadeBeneficio').value = listaDePatentes[i].particularidadeBeneficio;
+										document.getElementById('dificuldadeDesvantagem').value = listaDePatentes[i].dificuldadeDesvantagem;
+										document.getElementById('descricaoFiguras').value = listaDePatentes[i].descricaoReferenteFiguras;
+									}
+								}
+						})
+						.catch(function(error){
+							console.warn(error);
+					});
+					edicao = 'true';
+					document.getElementById("btAdicionar").innerHTML = "Editar";
+					break;
+
+				}
+			}
 
 
 			function adicionarPatente(){
@@ -123,28 +156,51 @@
 				var dificuldadeDesvantagem = document.getElementById('dificuldadeDesvantagem').value;
 				var descricaoReferenteFiguras = document.getElementById('descricaoFiguras').value;
 
-				if(nomeOficial !='' && campoAplicacao !=''){
-					axios.post('https://teste-patentes.herokuapp.com/patentes/create', {
-							nomeOficial: nomeOficial,
-							campoAplicacao: campoAplicacao,
-							descricaoOficial: descricaoOficial,
-							//objetivo: objetivo,
-							particularidadeBeneficio: particularidadeBeneficio,
-							dificuldadeDesvantagem: dificuldadeDesvantagem,
-							descricaoReferenteFiguras: descricaoReferenteFiguras
+				if(edicao == 'false'){
+					if(nomeOficial !='' && campoAplicacao !=''){
+						axios.post('https://teste-patentes.herokuapp.com/patentes/create', {
+								nomeOficial: nomeOficial,
+								campoAplicacao: campoAplicacao,
+								descricaoOficial: descricaoOficial,
+								//objetivo: objetivo,
+								particularidadeBeneficio: particularidadeBeneficio,
+								dificuldadeDesvantagem: dificuldadeDesvantagem,
+								descricaoReferenteFiguras: descricaoReferenteFiguras
+							})
+						.then(function(response){
+							window.alert('Patente adicionada com sucesso!');
+							window.location.href = 'home.html';
 						})
-					.then(function(response){
-						window.alert('Patente adicionada com sucesso!');
-						location.reload();
-					})
-					.catch(function(error){
-						window.alert('Falha ao cadastrar patente!');
-						console.warn(error);
-					});
+						.catch(function(error){
+							window.alert('Falha ao cadastrar patente!');
+							console.warn(error);
+						});
+					} else {
+						window.alert('Alguns campos estão vazios!');
+					}
 				} else {
-					window.alert('Alguns campos estão vazios!');
+					if(nomeOficial !='' && campoAplicacao !=''){
+						axios.post('https://teste-patentes.herokuapp.com/patentes/'+idUsuarioEditar+'/?_method=PUT ', {
+								nomeOficial: nomeOficial,
+								campoAplicacao: campoAplicacao,
+								descricaoOficial: descricaoOficial,
+								//objetivo: objetivo,
+								particularidadeBeneficio: particularidadeBeneficio,
+								dificuldadeDesvantagem: dificuldadeDesvantagem,
+								descricaoReferenteFiguras: descricaoReferenteFiguras
+							})
+						.then(function(response){
+							window.alert('Patente editada com sucesso!');
+							window.location.href = 'home.html';
+						})
+						.catch(function(error){
+							window.alert('Falha ao editar patente!');
+							console.warn(error);
+						});
+					} else {
+						window.alert('Alguns campos estão vazios!');
+					}
 				}
-
 			}
 			
 		</script>

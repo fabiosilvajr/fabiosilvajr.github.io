@@ -11,6 +11,8 @@
 		<script src="libraries/js/jquery.js"></script>
 		<link href="libraries/css/style.css" rel="stylesheet">
 		<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+		<script src="https://printjs-4de6.kxcdn.com/print.min.js"></script>
+		<script src="https://printjs-4de6.kxcdn.com/print.min.css"></script>
 
   </head>
 	
@@ -79,7 +81,6 @@
 				<div class="col-md-2">
 				</div>
 		</div>
-
 	</div>
 
 	<script>
@@ -92,7 +93,11 @@
 					listaDePatentes = response.data;
 					for(var i=0; i<response.data.length; i++){
 							row = table.insertRow(i+1);
-							row.innerHTML = "<td>"+listaDePatentes[i].nomeOficial+"</td> <td>"+listaDePatentes[i].createdAt+"</td> <td> <button class='btn btn-block btn-warning' onclick='visualizarPatente("+listaDePatentes[i].id+")'>Visualizar</button> </td> <td> <button class='btn btn-block btn-secondary' onclick='editarPatente("+listaDePatentes[i].id+")'>Editar</button> </td> <td> <button class='btn btn-block btn-danger' onclick='removerPatente("+listaDePatentes[i].id+")'>Remover</button></td>";
+							row.innerHTML = "<td>"+listaDePatentes[i].nomeOficial+"</td> \
+							<td>"+listaDePatentes[i].createdAt+"</td> \
+							<td> <button class='btn btn-block btn-warning' onclick='visualizarPatente("+listaDePatentes[i].id+")'>Visualizar</button> </td> \
+							<td> <button class='btn btn-block btn-secondary' onclick='editarPatente("+listaDePatentes[i].id+")'>Editar</button> </td> \
+							<td> <button class='btn btn-block btn-danger' onclick='removerPatente("+listaDePatentes[i].id+")'>Remover</button></td>";
 						}
 				})
 				.catch(function(error){
@@ -113,8 +118,12 @@
 		}
 		
 		function editarPatente(idPatente) {
-			window.location.href = 'add.html?'+idPatente;
-		} 
+			window.location.href = 'add.html?'+idPatente+'?';
+		}
+
+		function visualizarPatente(idPatente){
+			window.location.href = 'view.html?'+idPatente+'?';
+		}
 
 		listarPatentes();
 	</script>
